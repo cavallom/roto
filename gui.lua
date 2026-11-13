@@ -1,25 +1,3 @@
---local vb = renoise.ViewBuilder()
-
---local column_rack = vb:column {
---    margin = 1,          -- Optional: space around the rack
---    spacing = 2,         -- Optional: space between child views
---    style = "body",-- Optional: background style
---    
---    -- Child views are defined inline within this table
---    vb:text {
---        text = "Child View 1"
---    },
---    vb:text {
---        text = "Child View 2"
---    },
---    vb:checkbox {       
---        value = true
---    }
---} 
-local musicutil = require ("lib/musicutil")
-local notesutil = require ("lib/notesutil")
---local dialog = renoise.app():show_custom_dialog("Roto", column_rack)
-
 local pkv = 0
 local pkv2 = 0
 local pkv3 = 0
@@ -34,7 +12,6 @@ local nkv5 = 0
 local nkv6 = 0
 
 local seqcount = 1
-local currut = 0
 
 local curscale = nil
 local current_scale = nil
@@ -95,87 +72,37 @@ function Rdtset(ntrack, rdtval)
   end
 end
 
---[[ local curSong = renoise.song()
-SeqCountSet(#curSong.sequencer.pattern_sequence) ]]
 
 local function my_timer_function()
     if pkv ~= nkv then
       pkv = nkv
-      currut = nkv
-      --print("Timer triggered apply kv to " .. nkv)
 
---[[       curscale = musicutil.generate_scale_of_length(nkv, current_scale, 8)
-      if curscale then
-        print("Scale Test: ", table.concat(curscale, ", "))
-      else
-        print("Scale generation failed")
-      end ]]
       randomDo(nkv, 1)
     end
     if pkv2 ~= nkv2 then
       pkv2 = nkv2
-      currut = nkv2
-      --print("Timer triggered apply kv to " .. nkv2)
 
---[[       curscale = musicutil.generate_scale_of_length(nkv2, current_scale, 8)
-      if curscale then
-        print("Scale Test: ", table.concat(curscale, ", "))
-      else
-        print("Scale generation failed")
-      end ]]
       randomDo(nkv2, 2)
     end
     if pkv3 ~= nkv3 then
       pkv3 = nkv3
-      currut = nkv3
-      --print("Timer triggered apply kv to " .. nkv3)
 
---[[       curscale = musicutil.generate_scale_of_length(nkv3, current_scale, 8)
-      if curscale then
-        print("Scale Test: ", table.concat(curscale, ", "))
-      else
-        print("Scale generation failed")
-      end ]]
       randomDo(nkv3, 3)
     end
 
     if pkv4 ~= nkv4 then
       pkv4 = nkv4
-      currut = nkv4
-      --print("Timer triggered apply kv to " .. nkv4)
 
---[[       curscale = musicutil.generate_scale_of_length(nkv4, current_scale, 8)
-      if curscale then
-        print("Scale Test: ", table.concat(curscale, ", "))
-      else
-        print("Scale generation failed")
-      end ]]
       randomDo(nkv4, 4)
     end
     if pkv5 ~= nkv5 then
       pkv5 = nkv5
-      currut = nkv5
-      --print("Timer triggered apply kv to " .. nkv5)
 
---[[       curscale = musicutil.generate_scale_of_length(nkv5, current_scale, 8)
-      if curscale then
-        print("Scale Test: ", table.concat(curscale, ", "))
-      else
-        print("Scale generation failed")
-      end ]]
       randomDo(nkv5, 5)
     end
     if pkv6 ~= nkv6 then
       pkv6 = nkv6
-      currut = nkv6
-      --print("Timer triggered apply kv to " .. nkv6)
 
---[[       curscale = musicutil.generate_scale_of_length(nkv6, current_scale, 8)
-      if curscale then
-        print("Scale Test: ", table.concat(curscale, ", "))
-      else
-        print("Scale generation failed")
-      end ]]
       randomDo(nkv6, 6)
     end
 end
@@ -276,23 +203,6 @@ tooltip="Instrument #05 notes generator controller.",
   max = 127,
   midi_mapping = "Tools:MyGrooveTool:Groove Rotary 6" -- Assigns the MIDI mapping target
 }
-
---[[ renoise.tool():add_midi_mapping {
-    name = "Tools:MyGrooveTool:clear_all_cbox", -- Must match the midi_mapping string above
-    invoke = function(message)
-        -- Access the checkbox view to update its state
-        local checkbox_view = vb.views["clear_all_cbox"]
-        
-        if message:is_trigger() then
-            -- Toggle state for buttons/trigger messages
-            checkbox_view.value = not checkbox_view.value
-        elseif message:is_abs_value() then
-            -- Set state for absolute value messages (e.g., CC 0-127)
-            -- Convert 0-127 to boolean (e.g., > 64 is true)
-            checkbox_view.value = message.int_value > 64
-        end
-    end
-}  ]]  
 
 -- 2. Create the tool and add the MIDI mapping
 renoise.tool():add_midi_mapping {
@@ -462,18 +372,7 @@ renoise.tool():add_midi_mapping {
   end
 }
 
--- Define the scales table
---[[   local scale_selector = vb:popup {
-    --items = {"Opzione A", "Opzione B", "Opzione C"},
-    items = notesutil.get_all_scales(),
-    notifier = function(selected_index)
-      current_scale = selected_index
-      print("Selected scale index: " .. selected_index)
-      -- You can also retrieve the selected mode name if needed
-      local selected_mode_name = notesutil.get_all_scales()[selected_index]
-      print("Selected scale name: " .. selected_mode_name)
-    end
-  } ]]
+
 Dialog_content = vb:column {
     margin = renoise.ViewBuilder.DEFAULT_DIALOG_MARGIN,
     views = {
@@ -819,10 +718,7 @@ Dialog_content = vb:column {
         views = {
           vb:column {
             style = "body", -- Applies rounded corners
-            --margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
-            --spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
-            --width = "100%",
-            --height = 200,
+
             views = {
               --vb:text { text = "Column 1 Item 1" },
                   vb:button {
@@ -867,69 +763,7 @@ Dialog_content = vb:column {
                 --my_button.color = { 82, 36, 17} -- Renoise Orange RGB
               end
             end
-          }--,
-      --[[    vb:row {
-        views = {
-          vb:valuebox {
-            width = 50,
-            min = 1,      -- Minimum value
-            max = 100,    -- Maximum value
-            value = SeqCountGet(),
-            --bind = my_observable_number, -- Optional: bind to an ObservableNumber for sync
-            notifier = function(value)
-              -- Called when the value changes
-              --Clona gli slot da posizione 1 a 4 e li aggiunge dopo la posizione 4
-              --song.sequencer:clone_range(1, 4)   
-              local last_sequence_index = #curSong.sequencer.pattern_sequence
-              SeqCountSet(last_sequence_index)
-              if value > last_sequence_index then
-                --curSong.sequencer:insert_sequence_at(last_sequence_index + 1, 1)
-                curSong.sequencer:clone_range(last_sequence_index, last_sequence_index)
-                curSong.sequencer.pattern_sequence[last_sequence_index + 1] = last_sequence_index + 1   
-                print("New value: " .. value)
-              else
-                -- Remove the sequence position at index 1 (1-based)
-                curSong.sequencer:delete_sequence_at(last_sequence_index)
-              end
-            end
-          },
-          vb:text {
-            text = "+/- sequence"
           }
-        }
-      } ]]
-          
-          
-          
-          --[[ ,
-          vb:checkbox {
-              id = "clear_all_cbox",
-                value = isa,
-                    --notifier = function(bool_value)
-                    
-                        notifier = function(value)
-                          -- Handle state change
-                          print(value)
-                      
-              -- This function runs on every click
-              if value == true then
-                  -- Handle "checked" state
-                  print("Checkbox is ON")
-                  clear_all_pattern_sequence = true
-                  isa = trueGetNoteRoot
-              else
-                  -- Handle "unchecked" state
-                  print("Checkbox is OFF")
-                  clear_all_pattern_sequence = false
-                  isa = false
-              end
-          end,
-          midi_mapping = "Tools:MyGrooveTool:clear_all_cbox"
-              } ]]
-          
-          
-          --[[ ,
-              vb:text { text = "Roto Enabled:" } ]]
             }
           },
           vb:column {
@@ -939,9 +773,7 @@ Dialog_content = vb:column {
             vb:text {
               text = "The vb:row function creates a horizontal",
             },
---[[             vb:text {
-              text = "container that stacks child views side-by-side.",
-            } ]]
+
           }
         }
       }
@@ -950,9 +782,7 @@ Dialog_content = vb:column {
 
 
 
---[[ function Returnisa()GetNoteRoot
-  return isa
-end ]]
+
 
 function GetSelectedScale()
   return current_scale

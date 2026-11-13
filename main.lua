@@ -1,35 +1,7 @@
 _AUTO_RELOAD_DEBUG = true
 
---local musicutil = require ("lib/musicutil")
---local notesutil = require ("lib/notesutil")
---local gutils = require ("lib/gutils")
---local patternbuilder = require ("lib/patternbuilder")
-
 local active = require "gui"
---print(active)
-         
---local scalename = "major"
 
---local scaleTest = musicutil.generate_scale_of_length(0, scalename, 8)
---[[ if scaleTest then
-  print("Scale Test: ", table.concat(scaleTest, ", "))
-else
-  print("Scale generation failed")
-end ]]
-
---[[ local curScala = notesutil.get_scale("bebop tonic minor")
-if curScala then
-  print("Current Scale: ", table.concat(curScala, ", "))
-else
-  print("Scale retrieval failed")
-end ]]
--- print(notesutil.test())
-
---[[ local beats = gutils.create_range(0, 63)
-local shuffled_beats = gutils.shuffle(beats)
-local slice_beats = gutils.nslice(shuffled_beats, 8)
-print("Shuffled Beats: ", table.concat(shuffled_beats, ", ")) 
-print("Slice Beats: ", table.concat(slice_beats, ", ")) ]]
 
 function randomDo(note_root, icol)
   --print(icol)
@@ -54,14 +26,7 @@ function randomDo(note_root, icol)
   end
 
   local nl = pattern.number_of_lines
-  --print(nl)
 
-    --local curScale = GetSelectedScale()
-
-     --scaleTest = musicutil.generate_scale_of_length(0, curScale, 8)
-
-     --print("Scale Test: ", table.concat(scaleTest ", "))
-          -- Method C: Using the nested table structure
     local track = pattern.tracks and pattern.tracks[icol]
     local line = track and track.lines and playback_pos and track.lines[playback_pos.line +1 or 1]
     local note_col = line and line.note_columns and line.note_columns[1]
@@ -95,12 +60,8 @@ function randomDo(note_root, icol)
     local delay = math.random(0, 127) 
     math.randomseed(delay)
     local fx = math.random(0, 127) 
-    --print("volume: " .. vol)
-   --print("Scale: ", table.concat(GetSelectedScaleNotes() ", "))
 
---[[ local myArray = GetSelectedScaleNotes()
-local randomIndex = math.random(#myArray)
-local randomItem = #myArray[randomIndex]    ]]
+    
 
     note_col.note_value = num
     
@@ -118,19 +79,7 @@ local randomItem = #myArray[randomIndex]    ]]
     if Rdtget(icol) == true then
       note_col.delay_value = delay
     end
---[[     note_col.effect_number_value = 1
-    note_col.effect_amount_value = fx ]]
 
-    --line.effect_columns[1].number_string = "0G"
---line.effect_columns[1].amount_string = "20" -- Hex value for speed 48
-    
-    -- print(note_col)
---[[     if song and song.transport then
-      song.transport.playback_pos_beats = 0
-    end ]]
-    -- song.transport.playing = true 
-    
-    --local t2 = patternbuilder.scalewriter(curScala, slice_beats, 1, 2, 1, 2, 127)
     
     else
       for i = #song.sequencer.pattern_sequence, 1, -1 do
