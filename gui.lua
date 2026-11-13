@@ -117,7 +117,7 @@ local options = renoise.Document.create("KnobToolPreferences") {
 
 local rotary_view1 = vb:rotary {
 id = "rotary1",
-tooltip="Instrument #00 notes generator controller.",
+tooltip="Instrument #00 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv = value
@@ -130,7 +130,7 @@ tooltip="Instrument #00 notes generator controller.",
 local rotary_view2 = vb:rotary {
   
 id = "rotary2",
-tooltip="Instrument #01 notes generator controller.",
+tooltip="Instrument #01 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv2 = value
@@ -142,7 +142,7 @@ tooltip="Instrument #01 notes generator controller.",
 
 local rotary_view3 = vb:rotary {
 id = "rotary3",
-tooltip="Instrument #02 notes generator controller.",
+tooltip="Instrument #02 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv3 = value
@@ -155,7 +155,7 @@ tooltip="Instrument #02 notes generator controller.",
 
 local rotary_view4 = vb:rotary {
 id = "rotary4",
-tooltip="Instrument #03 notes generator controller.",
+tooltip="Instrument #03 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv4 = value
@@ -167,7 +167,7 @@ tooltip="Instrument #03 notes generator controller.",
 
 local rotary_view5 = vb:rotary {
 id = "rotary5",
-tooltip="Instrument #04 notes generator controller.",
+tooltip="Instrument #04 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv5 = value
@@ -179,7 +179,7 @@ tooltip="Instrument #04 notes generator controller.",
 
 local rotary_view6 = vb:rotary {
 id = "rotary6",
-tooltip="Instrument #05 notes generator controller.",
+tooltip="Instrument #05 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv6 = value
@@ -269,12 +269,12 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                vb:text { text = "#00", align = "center" }
+                vb:text { text = "#00", align = "center", tooltip = "Instrument index" }
               },
               vb:row {
-                id = "rv",
+                id = "rv1",
                 vb:checkbox {
-                  tooltip = "Randomize Volume",
+                  tooltip = "If enabled, this adds a random value for the volume to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the volume column is displayed in the track.",
                   value = Rvtget(1),
                   notifier = function(value)
                     Rvtset(1, value)
@@ -283,9 +283,9 @@ Dialog_content = vb:column {
                 vb:text { text = "*vol" }
               },
               vb:row {
-                id = "rp",
+                id = "rp1",
                 vb:checkbox {
-                  tooltip = "Randomize Panning",
+                  tooltip = "When enabled, this adds a random panning value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the panning column is displayed in the track.",
                   value = Rptget(1),
                   notifier = function(value)
                     Rptset(1, value)
@@ -294,9 +294,9 @@ Dialog_content = vb:column {
                 vb:text { text = "*pan" }
               },       
               vb:row {
-                id = "rd",
+                id = "rd1",
                 vb:checkbox {
-                  tooltip = "Randomize Delay",
+                  tooltip = "When enabled, this adds a random delay value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.",
                   value = Rdtget(1),
                   notifier = function(value)
                     Rdtset(1, value)
@@ -322,12 +322,12 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                vb:text { text = "#01", align = "center" }
+                vb:text { text = "#01", align = "center", tooltip = "Instrument index" }
               },
               vb:row {
                 id = "rv2",
                 vb:checkbox {
-                  tooltip = "Randomize Volume",
+                  tooltip = "If enabled, this adds a random value for the volume to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the volume column is displayed in the track.",
                   value = Rvtget(2),
                   notifier = function(value)
                     Rvtset(2, value)
@@ -338,7 +338,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rp2",
                 vb:checkbox {
-                  tooltip = "Randomize Panning",
+                  tooltip = "When enabled, this adds a random panning value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the panning column is displayed in the track.",
                   value = Rptget(2),
                   notifier = function(value)
                     Rptset(2, value)
@@ -349,7 +349,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rd2",
                 vb:checkbox {
-                  tooltip = "Randomize Delay",
+                  tooltip = "When enabled, this adds a random delay value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.",
                   value = Rdtget(2),
                   notifier = function(value)
                     Rdtset(2, value)
@@ -375,12 +375,12 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                vb:text { text = "#02", align = "center" }
+                vb:text { text = "#02", align = "center", tooltip = "Instrument index" }
               },
               vb:row {
                 id = "rv3",
                 vb:checkbox {
-                  tooltip = "Randomize Volume",
+                  tooltip = "If enabled, this adds a random value for the volume to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the volume column is displayed in the track.",
                   value = Rvtget(3),
                   notifier = function(value)
                     Rvtset(3, value)
@@ -391,7 +391,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rp3",
                 vb:checkbox {
-                  tooltip = "Randomize Panning",
+                  tooltip = "When enabled, this adds a random panning value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the panning column is displayed in the track.",
                   value = Rptget(3),
                   notifier = function(value)
                     Rptset(3, value)
@@ -402,7 +402,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rd3",
                 vb:checkbox {
-                  tooltip = "Randomize Delay",
+                  tooltip = "When enabled, this adds a random delay value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.",
                   value = Rdtget(3),
                   notifier = function(value)
                     Rdtset(3, value)
@@ -430,12 +430,12 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                vb:text { text = "#03", align = "center" }
+                vb:text { text = "#03", align = "center", tooltip = "Instrument index" }
               },
               vb:row {
                 id = "rv4",
                 vb:checkbox {
-                  tooltip = "Randomize Volume",
+                  tooltip = "If enabled, this adds a random value for the volume to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the volume column is displayed in the track.",
                   value = Rvtget(4),
                   notifier = function(value)
                     Rvtset(4, value)
@@ -446,7 +446,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rp4",
                 vb:checkbox {
-                  tooltip = "Randomize Panning",
+                  tooltip = "When enabled, this adds a random panning value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the panning column is displayed in the track.",
                   value = Rptget(4),
                   notifier = function(value)
                     Rptset(4, value)
@@ -457,7 +457,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rd4",
                 vb:checkbox {
-                  tooltip = "Randomize Delay",
+                  tooltip = "When enabled, this adds a random delay value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.",
                   value = Rdtget(4),
                   notifier = function(value)
                     Rdtset(4, value)
@@ -483,12 +483,12 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                vb:text { text = "#04", align = "center" }
+                vb:text { text = "#04", align = "center", tooltip = "Instrument index" }
               },
               vb:row {
                 id = "rv5",
                 vb:checkbox {
-                  tooltip = "Randomize Volume",
+                  tooltip = "If enabled, this adds a random value for the volume to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the volume column is displayed in the track.",
                   value = Rvtget(5),
                   notifier = function(value)
                     Rvtset(5, value)
@@ -499,7 +499,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rp5",
                 vb:checkbox {
-                  tooltip = "Randomize Panning",
+                  tooltip = "When enabled, this adds a random panning value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the panning column is displayed in the track.",
                   value = Rptget(5),
                   notifier = function(value)
                     Rptset(5, value)
@@ -510,7 +510,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rd5",
                 vb:checkbox {
-                  tooltip = "Randomize Delay",
+                  tooltip = "When enabled, this adds a random delay value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.",
                   value = Rdtget(5),
                   notifier = function(value)
                     Rdtset(5, value)
@@ -537,12 +537,12 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                vb:text { text = "#05", align = "center" }
+                vb:text { text = "#05", align = "center", tooltip = "Instrument index" }
               },
               vb:row {
                 id = "rv6",
                 vb:checkbox {
-                  tooltip = "Randomize Volume",
+                  tooltip = "If enabled, this adds a random value for the volume to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the volume column is displayed in the track.",
                   value = Rvtget(6),
                   notifier = function(value)
                     Rvtset(6, value)
@@ -553,7 +553,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rp6",
                 vb:checkbox {
-                  tooltip = "Randomize Panning",
+                  tooltip = "When enabled, this adds a random panning value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the panning column is displayed in the track.",
                   value = Rptget(6),
                   notifier = function(value)
                     Rptset(6, value)
@@ -564,7 +564,7 @@ Dialog_content = vb:column {
               vb:row {
                 id = "rd6",
                 vb:checkbox {
-                  tooltip = "Randomize Delay",
+                  tooltip = "When enabled, this adds a random delay value to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.",
                   value = Rdtget(6),
                   notifier = function(value)
                     Rdtset(6, value)
@@ -602,7 +602,7 @@ Dialog_content = vb:column {
                     
                   id = "bt",
             text = "Start",
-            tooltip = "Start Roto!",
+            tooltip = "The generation and writing of notes is triggered only if playback is initiated using the\n[Start] button in the Roto tool.",
             notifier = function()
               --print("Button clicked!")
               
@@ -619,7 +619,7 @@ Dialog_content = vb:column {
                   end
                 --renoise.tool():remove_timer(my_timer_function) 
                   my_button.text = "Start"
-                  my_button.tooltip = "Start Roto!"
+                  my_button.tooltip = "The generation and writing of notes is triggered only if playback is initiated using the\n[Start] button in the Roto tool."
                   --my_button.color = { 82, 36, 17} 
               else
                 renoise.song().transport.playing = true
@@ -629,7 +629,7 @@ Dialog_content = vb:column {
                 end
                 --renoise.tool():add_timer(my_timer_function, 1000) 
                 my_button.text = "Stop"
-                my_button.tooltip = "Stop Roto!"
+                my_button.tooltip = "The generation and writing of notes is triggered only if playback is initiated using the\n[Start] button in the Roto tool."
                 --my_button.color = { 0xFF, 0x00, 0x00 } -- Red in RGB (0-255)
                 --my_button.color = { 82, 36, 17} -- Renoise Orange RGB
               end
@@ -645,6 +645,7 @@ Dialog_content = vb:column {
             --margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
             --spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
             vb:text {
+              visible = false,
               text = "When Roto is running, set the knob to 0\nto clear all sequences in a track.",
             },
 
