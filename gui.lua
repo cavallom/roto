@@ -13,9 +13,6 @@ local nkv6 = 0
 
 local seqcount = 1
 
-local curscale = nil
-local current_scale = nil
-
 local rv = { true, true, true, true, true, true }
 local rp = { false, false, false, false, false, false }
 local rd = { false, false, false, false, false, false }
@@ -118,274 +115,147 @@ local options = renoise.Document.create("KnobToolPreferences") {
 
 -- 2. Create the rotary view and bind it
 
-local rotary_view = vb:rotary {
-id = "groove_rotary",
+local rotary_view1 = vb:rotary {
+id = "rotary1",
 tooltip="Instrument #00 notes generator controller.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
-    -- This function triggers whenever the knob is moved
-    --print("Knob 1 value changed to: " .. value)
     nkv = value
   end,
   min = 0, -- Optional: Set min/max range
   max = 127,
-  midi_mapping = "Tools:MyGrooveTool:Groove Rotary" -- Assigns the MIDI mapping target
+  midi_mapping = "Tools:Roto:Rotary_#01" -- Assigns the MIDI mapping target
 }
 
 local rotary_view2 = vb:rotary {
   
-id = "groove_rotary2",
+id = "rotary2",
 tooltip="Instrument #01 notes generator controller.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
-    -- This function triggers whenever the knob is moved
-    --print("Knob 2 value changed to: " .. value)
     nkv2 = value
   end,
   min = 0, -- Optional: Set min/max range
   max = 127,
-  midi_mapping = "Tools:MyGrooveTool:Groove Rotary 2" -- Assigns the MIDI mapping target
+  midi_mapping = "Tools:Roto:Rotary_#02" -- Assigns the MIDI mapping target
 }
 
 local rotary_view3 = vb:rotary {
-id = "groove_rotary3",
+id = "rotary3",
 tooltip="Instrument #02 notes generator controller.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
-    -- This function triggers whenever the knob is moved
-    --print("Knob 3 value changed to: " .. value)
     nkv3 = value
   end,
   min = 0, -- Optional: Set min/max range
   max = 127,
-  midi_mapping = "Tools:MyGrooveTool:Groove Rotary 3" -- Assigns the MIDI mapping target
+  midi_mapping = "Tools:Roto:Rotary_#03" -- Assigns the MIDI mapping target
 }
 
 
 local rotary_view4 = vb:rotary {
-id = "groove_rotary4",
+id = "rotary4",
 tooltip="Instrument #03 notes generator controller.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
-    -- This function triggers whenever the knob is moved
-    --print("Knob 4 value changed to: " .. value)
     nkv4 = value
   end,
   min = 0, -- Optional: Set min/max range
   max = 127,
-  midi_mapping = "Tools:MyGrooveTool:Groove Rotary 4" -- Assigns the MIDI mapping target
+  midi_mapping = "Tools:Roto:Rotary_#04" -- Assigns the MIDI mapping target
 }
 
 local rotary_view5 = vb:rotary {
-id = "groove_rotary5",
+id = "rotary5",
 tooltip="Instrument #04 notes generator controller.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
-    -- This function triggers whenever the knob is moved
-    --print("Knob 5 value changed to: " .. value)
     nkv5 = value
   end,
   min = 0, -- Optional: Set min/max range
   max = 127,
-  midi_mapping = "Tools:MyGrooveTool:Groove Rotary 5" -- Assigns the MIDI mapping target
+  midi_mapping = "Tools:Roto:Rotary_#05" -- Assigns the MIDI mapping target
 }
 
 local rotary_view6 = vb:rotary {
-id = "groove_rotary6",
+id = "rotary6",
 tooltip="Instrument #05 notes generator controller.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
-    -- This function triggers whenever the knob is moved
-    --print("Knob 6 value changed to: " .. value)
     nkv6 = value
   end,
   min = 0, -- Optional: Set min/max range
   max = 127,
-  midi_mapping = "Tools:MyGrooveTool:Groove Rotary 6" -- Assigns the MIDI mapping target
+  midi_mapping = "Tools:Roto:Rotary_#06" -- Assigns the MIDI mapping target
 }
 
--- 2. Create the tool and add the MIDI mapping
 renoise.tool():add_midi_mapping {
-  name = "Tools:MyGrooveTool:Groove Rotary",
+  name = "Tools:Roto:Rotary_#01",
   invoke = function(midi_message)
-    -- This function is called when MIDI data is received
-    -- You must manually update the rotary's value property to sync the UI
-    -- midi_message.value is typically 0-127
-    
-    -- Update the rotary object's value to reflect the MIDI input
-    
-    --print(midi_message.int_value)
-    ---@class rotary_view : renoise.Views.View
+    ---@class RotaryView
     ---@field value number
-    ---@type rotary_view
-    local my_ro = vb.views["groove_rotary"]
+    ---@type RotaryView
+    local my_ro = vb.views["rotary1"]
     --print(my_ro)
     my_ro.value = midi_message.int_value
-    
-    -- The notifier will automatically trigger because value changed
-    -- If you need to scale 0-127 to 0-100, do so here before assigning
   end
 }
 
--- 2. Create the tool and add the MIDI mapping
 renoise.tool():add_midi_mapping {
-  name = "Tools:MyGrooveTool:Groove Rotary 2",
+  name = "Tools:Roto:Rotary_#02",
   invoke = function(midi_message)
-    -- This function is called when MIDI data is received
-    -- You must manually update the rotary's value property to sync the UI
-    -- midi_message.value is typically 0-127
-    
-    -- Update the rotary object's value to reflect the MIDI input
-    
-    --print(midi_message.int_value)
-    ---@class rotary_view : renoise.Views.View
-    ---@field value number
-    ---@type rotary_view
-    local my_ro = vb.views["groove_rotary2"]
+    ---@type RotaryView
+    local my_ro = vb.views["rotary2"]
     --print(my_ro)
     my_ro.value = midi_message.int_value
-    
-    -- The notifier will automatically trigger because value changed
-    -- If you need to scale 0-127 to 0-100, do so here before assigning
-  end
-}
--- 2. Create the tool and add the MIDI mapping
-renoise.tool():add_midi_mapping {
-  name = "Tools:MyGrooveTool:Groove Rotary 3",
-  invoke = function(midi_message)
-    -- This function is called when MIDI data is received
-    -- You must manually update the rotary's value property to sync the UI
-    -- midi_message.value is typically 0-127
-    
-    -- Update the rotary object's value to reflect the MIDI input
-    
-    --print(midi_message.int_value)
-    ---@class rotary_view : renoise.Views.View
-    ---@field value number
-    ---@type rotary_view
-    local my_ro = vb.views["groove_rotary3"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-    
-    -- The notifier will automatically trigger because value changed
-    -- If you need to scale 0-127 to 0-100, do so here before assigning
-  end  
-}
-
-
-
-
-renoise.tool():add_midi_mapping {
-  name = "Tools:MyGrooveTool:Groove Rotary 4",
-  invoke = function(midi_message)
-    -- This function is called when MIDI data is received
-    -- You must manually update the rotary's value property to sync the UI
-    -- midi_message.value is typically 0-127
-    
-    -- Update the rotary object's value to reflect the MIDI input
-    
-    --print(midi_message.int_value)
-    ---@class rotary_view : renoise.Views.View
-    ---@field value number
-    ---@type rotary_view
-    local my_ro = vb.views["groove_rotary4"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-    
-    -- The notifier will automatically trigger because value changed
-    -- If you need to scale 0-127 to 0-100, do so here before assigning
   end
 }
 
--- 2. Create the tool and add the MIDI mapping
 renoise.tool():add_midi_mapping {
-  name = "Tools:MyGrooveTool:Groove Rotary 5",
+  name = "Tools:Roto:Rotary_#03",
   invoke = function(midi_message)
-    -- This function is called when MIDI data is received
-    -- You must manually update the rotary's value property to sync the UI
-    -- midi_message.value is typically 0-127
-    
-    -- Update the rotary object's value to reflect the MIDI input
-    
-    --print(midi_message.int_value)
-    ---@class rotary_view : renoise.Views.View
-    ---@field value number
-    ---@type rotary_view
-    local my_ro = vb.views["groove_rotary5"]
+    ---@type RotaryView
+    local my_ro = vb.views["rotary3"]
     --print(my_ro)
     my_ro.value = midi_message.int_value
-    
-    -- The notifier will automatically trigger because value changed
-    -- If you need to scale 0-127 to 0-100, do so here before assigning
-  end
-}
--- 2. Create the tool and add the MIDI mapping
-renoise.tool():add_midi_mapping {
-  name = "Tools:MyGrooveTool:Groove Rotary 6",
-  invoke = function(midi_message)
-    -- This function is called when MIDI data is received
-    -- You must manually update the rotary's value property to sync the UI
-    -- midi_message.value is typically 0-127
-    
-    -- Update the rotary object's value to reflect the MIDI input
-    
-    --print(midi_message.int_value)
-    ---@class rotary_view : renoise.Views.View
-    ---@field value number
-    ---@type rotary_view
-    local my_ro = vb.views["groove_rotary6"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-    
-    -- The notifier will automatically trigger because value changed
-    -- If you need to scale 0-127 to 0-100, do so here before assigning
-  end  
-}
-
-
-
-
-
-
-
-
--- 2. Create the tool and add the MIDI mapping
-renoise.tool():add_midi_mapping {
-  name = "Tools:MyGrooveTool:my_slider",
-  invoke = function(midi_message)
-    -- This function is called when MIDI data is received
-    -- You must manually update the rotary's value property to sync the UI
-    -- midi_message.value is typically 0-127
-    
-    -- Update the rotary object's value to reflect the MIDI input
-    
-    --print(midi_message.int_value)
-    ---@class my_slider : renoise.Views.View
-    ---@field value number
-    ---@type my_slider
-    local my_ro = vb.views["my_slider"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-    
-    -- The notifier will automatically trigger because value changed
-    -- If you need to scale 0-127 to 0-100, do so here before assigning
   end
 }
 
+renoise.tool():add_midi_mapping {
+  name = "Tools:Roto:Rotary_#04",
+  invoke = function(midi_message)
+    ---@type RotaryView
+    local my_ro = vb.views["rotary4"]
+    --print(my_ro)
+    my_ro.value = midi_message.int_value
+  end
+}
+
+renoise.tool():add_midi_mapping {
+  name = "Tools:Roto:Rotary_#05",
+  invoke = function(midi_message)
+    ---@type RotaryView
+    local my_ro = vb.views["rotary5"]
+    --print(my_ro)
+    my_ro.value = midi_message.int_value
+  end
+}
+
+renoise.tool():add_midi_mapping {
+  name = "Tools:Roto:Rotary_#06",
+  invoke = function(midi_message)
+    ---@type RotaryView
+    local my_ro = vb.views["rotary6"]
+    --print(my_ro)
+    my_ro.value = midi_message.int_value
+  end
+}
 
 Dialog_content = vb:column {
     margin = renoise.ViewBuilder.DEFAULT_DIALOG_MARGIN,
     views = {
       vb:row {
         views = {
-      --[[     vb: column {
-            margin = 5,
-            spacing = 5,
-            views = {
-              vb:text { text = "Select Scale" },
-              scale_selector
-            }
-          }, ]]
           vb: column {
             style = "group", -- Applies rounded corners
             margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
@@ -394,7 +264,7 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                rotary_view
+                rotary_view1
               },
               vb:horizontal_aligner {
                 mode = "center",
@@ -717,21 +587,22 @@ Dialog_content = vb:column {
       vb:row {
         views = {
           vb:column {
+
             style = "body", -- Applies rounded corners
 
             views = {
               --vb:text { text = "Column 1 Item 1" },
                   vb:button {
                     style = "rounded",
-                    height = 24,
+                    height = 30,
                     --color = {0xFF, 0xA5, 0x00},
                     secondary_color = {0x00, 0x00, 0x00},
 
-                    width = 100,
+                    width = 80,
                     
                   id = "bt",
             text = "Start",
-            tooltip = "Start performance!",
+            tooltip = "Start Roto!",
             notifier = function()
               --print("Button clicked!")
               
@@ -748,7 +619,7 @@ Dialog_content = vb:column {
                   end
                 --renoise.tool():remove_timer(my_timer_function) 
                   my_button.text = "Start"
-                  my_button.tooltip = "Start performance!"
+                  my_button.tooltip = "Start Roto!"
                   --my_button.color = { 82, 36, 17} 
               else
                 renoise.song().transport.playing = true
@@ -758,7 +629,7 @@ Dialog_content = vb:column {
                 end
                 --renoise.tool():add_timer(my_timer_function, 1000) 
                 my_button.text = "Stop"
-                my_button.tooltip = "Stop performance!"
+                my_button.tooltip = "Stop Roto!"
                 --my_button.color = { 0xFF, 0x00, 0x00 } -- Red in RGB (0-255)
                 --my_button.color = { 82, 36, 17} -- Renoise Orange RGB
               end
@@ -767,11 +638,14 @@ Dialog_content = vb:column {
             }
           },
           vb:column {
-            width = 244,
+            style = "body"
+          },
+          vb:column {
+            --width = 244,
             --margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
             --spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
             vb:text {
-              text = "The vb:row function creates a horizontal",
+              text = "When Roto is running, set the knob to 0\nto clear all sequences in a track.",
             },
 
           }
@@ -780,18 +654,6 @@ Dialog_content = vb:column {
     }
 }
 
-
-
-
-
-function GetSelectedScale()
-  return current_scale
-end
-
-function GetSelectedScaleNotes()
-  return curscale
-end
-  
 function GetNoteRoot()
   return nkv
 end

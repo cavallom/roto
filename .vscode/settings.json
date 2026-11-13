@@ -2,8 +2,7 @@
     "Lua.workspace.library": [ "/home/cavallom/luadev" ],
     "Lua.runtime.plugin": "/home/cavallom/luadev/plugin.lua",
     "Lua.diagnostics.globals": [
-        "randomDo",
-        "helloWorld"
+        "randomDo"
     ]
 ,
   "oscSender.remoteAddress": "127.0.0.1",
