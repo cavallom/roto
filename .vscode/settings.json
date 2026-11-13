@@ -1,0 +1,17 @@
+{
+    "Lua.workspace.library": [ "/home/cavallom/luadev" ],
+    "Lua.runtime.plugin": "/home/cavallom/luadev/plugin.lua",
+    "Lua.diagnostics.globals": [
+        "randomDo",
+        "helloWorld"
+    ]
+,
+  "oscSender.remoteAddress": "127.0.0.1",
+  "oscSender.remotePort": 8000,
+  "oscSender.messages": {
+    "/renoise/transport/start": [],
+    "/renoise/song/bpm": [100],
+    "/renoise/song/record/metronome": true/* ,
+    "/cmd2": [123, true, 45.67] */
+  }
+}

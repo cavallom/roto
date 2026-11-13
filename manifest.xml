@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RenoiseScriptingTool doc_version="0">
+  <!-- REQUIRED -->
+  <Id>roto.buddha.rocks</Id>
+  <ApiVersion>6.2</ApiVersion>
+  <Version>1.02</Version>
+  <Author>Buddha [buddha@buddha.rocks]</Author>
+  <Name>Roto</Name>
+  <!-- OPTIONAL -->
+  <Category>Development, Workflow</Category>
+  <Description>
+    This tool is for generate notes from...
+  </Description>
+  <Platform>Windows, Mac, Linux</Platform>
+  <License>MIT</License>
+  <LicensePath></LicensePath>
+  <ThumbnailPath></ThumbnailPath>
+  <CoverPath></CoverPath>
+  <DocumentationPath></DocumentationPath>
+  <Homepage>https://tools.buddha.rocks</Homepage>
+  <Documentation>https://tools.buddha.rocks</Documentation>
+  <Discussion>https://tools.buddha.rocks</Discussion>
+  <Repository>https://tools.buddha.rocks</Repository>
+  <Donate>https://tools.buddha.rocks</Donate>
+</RenoiseScriptingTool>
+
