@@ -1,10 +1,9 @@
 _AUTO_RELOAD_DEBUG = true
 
 local active = require "gui"
-local song = renoise.song()
 
 function randomDo(note_root, icol)
-
+  local song = renoise.song()
   local transport = song and song.transport
   local playback_pos = transport and transport.playback_pos
 
@@ -127,8 +126,7 @@ local function track_exists_by_name(name)
 end
 
 local function show_roto_dialog()
-  --print('show_roto_dialog')
-  -- To display, use:
+local song = renoise.song()
 renoise.app():show_custom_dialog("Roto", Dialog_content)
 
 if not song then
