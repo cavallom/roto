@@ -1,21 +1,21 @@
-# valitalor
+# Roto
 
-Italian localized validation library. Since the package is localized, by choice some of the code and documentation are also localized.
+Roto is a Renoise tool. It is a random note generator—unconstrained by musical scales or harmonic logic—that uses six tracks, each controlled by its own dedicated knob.
 
-- [valitalor](#valitalor)
-  - [Installation](#installation)
-    - [Package check](#package-check)
-  - [Usage](#usage)
-    - [isCodiceFiscale](#iscodicefiscale)
-    - [isIBAN](#isiban)
-    - [isPartitaIVA](#ispartitaiva)
-    - [isTargaAuto](#istargaauto)
-    - [isTargaMoto](#istargamoto)
-  - [License](#license)
+* [Roto](#roto)
+    * [Generation](#Generation)
+        * [Package check](#package-check)
+    * [Usage](#usage)
+        * [isCodiceFiscale](#iscodicefiscale)
+        * [isIBAN](#isiban)
+        * [isPartitaIVA](#ispartitaiva)
+        * [isTargaAuto](#istargaauto)
+        * [isTargaMoto](#istargamoto)
+    * [License](#license)
 
-## Installation
+## Generation
 
-You can install this package via npm.
+With each movement of the knob, the range for note randomization is narrowed; it begins from the note selected at the end of the rotation, extending one octave above and one octave below. From the resulting set of notes (including semitones), a note is chosen at random and written into the sequence for the corresponding track.
 
 ```bash
 npm i valitalor
@@ -26,7 +26,7 @@ npm i valitalor
 Just to check the success of the installation, also returns basic package information.
 
 | Param | Type | Mandatory | Description |
-| ----- | ---- | ----------- | --------- |
+| ----- | ---- | --------- | ----------- |
 |  |  |  | No parameters are required |
 
 ```bash
@@ -47,7 +47,7 @@ console.log(valita.itWorks());
 Validation of the "Codice Fiscale" (individual TAX code) including verification of the control character.
 
 | Param | Type | Mandatory | Description |
-| ----- | ---- | ----------- | --------- |
+| ----- | ---- | --------- | ----------- |
 | codicefiscale | string | true | Codice Fiscale |
 
 ```bash
@@ -62,7 +62,7 @@ console.log(valita.isCodiceFiscale('<codicefiscale>'));
 Formal validation of the IBAN bank account code.
 
 | Param | Type | Mandatory | Description |
-| ----- | ---- | ----------- | --------- |
+| ----- | ---- | --------- | ----------- |
 | IBAN | string | true | IBAN |
 
 ```bash
@@ -77,7 +77,7 @@ console.log(valita.isIBAN('<IBAN>'));
 Validation of the "Partita IVA" (VAT code) including verification of the control number.
 
 | Param | Type | Mandatory | Description |
-| ----- | ---- | ----------- | --------- |
+| ----- | ---- | --------- | ----------- |
 | partitIVA | string | true | "Partita IVA" (VAT code) |
 
 ```bash
@@ -92,7 +92,7 @@ console.log(valita.isPartitaIVA('<partitIVA>'));
 Formal validation of the car license plate number.
 
 | Param | Type | Mandatory | Description |
-| ----- | ---- | ----------- | --------- |
+| ----- | ---- | --------- | ----------- |
 | targa | string | true | Car license plate number |
 
 ```bash
@@ -107,7 +107,7 @@ console.log(valita.isTargaAuto('<targa>'));
 Formal validation of the motorcycle license plate number.
 
 | Param | Type | Mandatory | Description |
-| ----- | ---- | ----------- | --------- |
+| ----- | ---- | --------- | ----------- |
 | targa | string | true | Motorcycle license plate number |
 
 ```bash
