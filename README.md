@@ -6,7 +6,9 @@ Roto is a Renoise tool. It is a random note generator—unconstrained by musical
     * [Load Roto Tool](#Load-Roto-Tool)
     * [Activation](#Activation)
     * [Note generation](#Note-generation)
-        * [Package check](#package-check)
+        * [Volume](#Volume)
+        * [Pan](#Pan)
+        * [Delay](#Delay)                
     * [Usage](#usage)
         * [isCodiceFiscale](#iscodicefiscale)
         * [isIBAN](#isiban)
@@ -26,6 +28,18 @@ The generation and writing of notes is triggered only if playback is initiated u
 ## Note generation
 
 With each movement of the knob, the range for note randomization is narrowed; it begins from the note selected at the end of the rotation, extending one octave above and one octave below. From the resulting set of notes (including semitones), a note is chosen at random and written into the current step of the active sequence for the corresponding track.
+
+### Volume
+
+If enabled the [*vol] checkbox, this adds a random value for the volume to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the volume column is displayed in the track.
+
+### Pan
+
+If enabled the [*pan] checkbox, this adds a random value for the panning to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the panning column is displayed in the track.
+
+### Delay
+
+If enabled the [*dly] checkbox, this adds a random delay for the panning to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.
 
 ## License
 
