@@ -1,6 +1,6 @@
 # Roto
 
-Roto is a Renoise tool. It is a random note generator—unconstrained by musical scales or harmonic logic—that uses six tracks, each controlled by its own dedicated knob.
+The Roto tool designed for live performances. The live performance that is captured can, however, also be render as a song. It is a random note generator—unconstrained by musical scales or harmonic logic—that uses six tracks, each controlled by its own dedicated knob.
 
 * [Roto](#roto)
     * [Load Roto Tool](#Load-Roto-Tool)
