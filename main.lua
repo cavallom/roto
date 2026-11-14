@@ -15,7 +15,7 @@ function randomDo(note_root, icol)
   local cur_playback_pos = renoise.song().transport.playback_pos
   local pattern = song and song.patterns and song.patterns[cur_playback_pos.sequence]
   local curpatterns = song and song.patterns
-  
+
   if not pattern then
     print("Pattern 1 is unavailable")
     return
@@ -33,16 +33,16 @@ function randomDo(note_root, icol)
   if note_root > 0 then
 
     pattern.tracks[icol]:clear()
-  
+
     local n_min = note_root - 12
     if n_min < 30 then n_min = 30 end
-    
+
     local n_max = note_root + 12
     if n_max > 100 then n_max = 100 end
 
     math.randomseed(note_root)
-    local num = math.random(n_min, n_max) 
-    
+    local num = math.random(n_min, n_max)
+
     math.randomseed(num)
     local vol = math.random(0, 127)
 
@@ -50,13 +50,13 @@ function randomDo(note_root, icol)
     local pan = math.random(0, 127) 
 
     math.randomseed(pan)
-    local delay = math.random(0, 127) 
+    local delay = math.random(0, 127)
 
     -- math.randomseed(delay)
     -- local fx = math.random(0, 127) 
 
     note_col.note_value = num
-    
+
     note_col.instrument_value = icol-1
 
     if Rvtget(icol) == true then
@@ -83,11 +83,9 @@ function randomDo(note_root, icol)
         if note_col then
           note_col.note_value = 120
         end
-        -- 
       end
     end
   end
-
 end
 
 local function on_song_loaded()
@@ -144,13 +142,12 @@ local function show_roto_dialog()
       --print("Track found: " .. track_obj.name)
     else
       --print("Track not found")
-        song:insert_track_at(i) -- Insert at top
-    --local trackpos = s
-    local new_track = song:track(i)
-    if new_track then
-      new_track.name = "Instrument #0" .. i-1
-    end
-    --new_track.visible_note_columns = 4   
+      song:insert_track_at(i) -- Insert at top
+      --local trackpos = s
+      local new_track = song:track(i)
+      if new_track then
+        new_track.name = "Instrument #0" .. i-1
+      end
     end
   end
 
@@ -163,12 +160,11 @@ local function show_roto_dialog()
       group_track.name = "Roto"
     end
     -- Assign tracks to the group
-    song:add_track_to_group(2, 1)
-    song:add_track_to_group(3, 2)
-    song:add_track_to_group(4, 3)
-    song:add_track_to_group(5, 4)
-    song:add_track_to_group(6, 5)
-    song:add_track_to_group(7, 6)
+    for i = 0, 5 do
+      local ti = i+2
+      local tg = i+1
+      song:add_track_to_group(ti, tg)
+    end
   end
 
 end
