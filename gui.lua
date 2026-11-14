@@ -117,7 +117,7 @@ local options = renoise.Document.create("KnobToolPreferences") {
 
 local rotary_view1 = vb:rotary {
 id = "rotary1",
-tooltip="Instrument #00 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
+tooltip="Instrument #00 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv = value
@@ -130,7 +130,7 @@ tooltip="Instrument #00 notes generator controller.\n\nWhen Roto is running gene
 local rotary_view2 = vb:rotary {
   
 id = "rotary2",
-tooltip="Instrument #01 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
+tooltip="Instrument #01 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv2 = value
@@ -142,7 +142,7 @@ tooltip="Instrument #01 notes generator controller.\n\nWhen Roto is running gene
 
 local rotary_view3 = vb:rotary {
 id = "rotary3",
-tooltip="Instrument #02 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
+tooltip="Instrument #02 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv3 = value
@@ -155,7 +155,7 @@ tooltip="Instrument #02 notes generator controller.\n\nWhen Roto is running gene
 
 local rotary_view4 = vb:rotary {
 id = "rotary4",
-tooltip="Instrument #03 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
+tooltip="Instrument #03 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv4 = value
@@ -167,7 +167,7 @@ tooltip="Instrument #03 notes generator controller.\n\nWhen Roto is running gene
 
 local rotary_view5 = vb:rotary {
 id = "rotary5",
-tooltip="Instrument #04 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
+tooltip="Instrument #04 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv5 = value
@@ -179,7 +179,7 @@ tooltip="Instrument #04 notes generator controller.\n\nWhen Roto is running gene
 
 local rotary_view6 = vb:rotary {
 id = "rotary6",
-tooltip="Instrument #05 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position.\nWrites the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nCan be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
+tooltip="Instrument #05 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
   --bind = options.volume, -- Binds view to the Observable
   notifier = function(value)
     nkv6 = value
