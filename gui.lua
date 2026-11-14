@@ -1,17 +1,5 @@
-local pkv = 0
-local pkv2 = 0
-local pkv3 = 0
-local pkv4 = 0
-local pkv5 = 0
-local pkv6 = 0
-local nkv = 0
-local nkv2 = 0
-local nkv3 = 0
-local nkv4 = 0
-local nkv5 = 0
-local nkv6 = 0
-
-local seqcount = 1
+local pkv = { 0, 0, 0, 0, 0, 0 }
+local nkv = { 0, 0, 0, 0, 0, 0 }
 
 local rv = { true, true, true, true, true, true }
 local rp = { false, false, false, false, false, false }
@@ -20,14 +8,6 @@ local rd = { false, false, false, false, false, false }
 
 function EvoSongGet()
   return renoise.song()
-end
-
-function SeqCountGet()
-  return seqcount
-end
-
-function SeqCountSet(nseqcount)
-  seqcount = nseqcount
 end
 
 function Rvtget(ntrack)
@@ -71,197 +51,56 @@ end
 
 
 local function my_timer_function()
-    if pkv ~= nkv then
-      pkv = nkv
 
-      randomDo(nkv, 1)
+  for i = 1, 6 do
+    if pkv[i] ~= nkv[i] then
+      pkv[i] = nkv[i]
+
+      randomDo(nkv[i], i)
     end
-    if pkv2 ~= nkv2 then
-      pkv2 = nkv2
+  end
 
-      randomDo(nkv2, 2)
-    end
-    if pkv3 ~= nkv3 then
-      pkv3 = nkv3
-
-      randomDo(nkv3, 3)
-    end
-
-    if pkv4 ~= nkv4 then
-      pkv4 = nkv4
-
-      randomDo(nkv4, 4)
-    end
-    if pkv5 ~= nkv5 then
-      pkv5 = nkv5
-
-      randomDo(nkv5, 5)
-    end
-    if pkv6 ~= nkv6 then
-      pkv6 = nkv6
-
-      randomDo(nkv6, 6)
-    end
 end
 
-
 local vb = renoise.ViewBuilder()
-local isa = true
 
--- 1. Create an Observable for the knob's value
 local rotooption = renoise.Document.create("RotoToolPreferences") {
-  valknob1 = 0, -- Default value
-  valknob2 = 0,
-  valknob3 = 0,
-  valknob4 = 0,
-  valknob5 = 0,
-  valknob6 = 0
+  valknobs = { 0, 0, 0, 0, 0, 0 }
 }
 
--- 2. Create the rotary view and bind it
+local rotary_views = {}
 
-local rotary_view1 = vb:rotary {
-id = "rotary1",
-tooltip="Instrument #00 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
-  bind = rotooption["valknob1"], -- Binds view to the Observable
-  notifier = function(value)
-    nkv = value
-  end,
-  min = 0, -- Optional: Set min/max range
-  max = 127,
-  midi_mapping = "Tools:Roto:Rotary_#01" -- Assigns the MIDI mapping target
-}
-
-local rotary_view2 = vb:rotary {
-  
-id = "rotary2",
-tooltip="Instrument #01 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
-  bind = rotooption["valknob2"], -- Binds view to the Observable
-  notifier = function(value)
-    nkv2 = value
-  end,
-  min = 0, -- Optional: Set min/max range
-  max = 127,
-  midi_mapping = "Tools:Roto:Rotary_#02" -- Assigns the MIDI mapping target
-}
-
-local rotary_view3 = vb:rotary {
-id = "rotary3",
-tooltip="Instrument #02 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
-  bind = rotooption["valknob3"], -- Binds view to the Observable
-  notifier = function(value)
-    nkv3 = value
-  end,
-  min = 0, -- Optional: Set min/max range
-  max = 127,
-  midi_mapping = "Tools:Roto:Rotary_#03" -- Assigns the MIDI mapping target
-}
-
-
-local rotary_view4 = vb:rotary {
-id = "rotary4",
-tooltip="Instrument #03 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
-  bind = rotooption["valknob4"], -- Binds view to the Observable
-  notifier = function(value)
-    nkv4 = value
-  end,
-  min = 0, -- Optional: Set min/max range
-  max = 127,
-  midi_mapping = "Tools:Roto:Rotary_#04" -- Assigns the MIDI mapping target
-}
-
-local rotary_view5 = vb:rotary {
-id = "rotary5",
-tooltip="Instrument #04 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
-  bind = rotooption["valknob5"], -- Binds view to the Observable
-  notifier = function(value)
-    nkv5 = value
-  end,
-  min = 0, -- Optional: Set min/max range
-  max = 127,
-  midi_mapping = "Tools:Roto:Rotary_#05" -- Assigns the MIDI mapping target
-}
-
-local rotary_view6 = vb:rotary {
-id = "rotary6",
-tooltip="Instrument #05 notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
-  bind = rotooption["valknob6"], -- Binds view to the Observable
-  notifier = function(value)
-    nkv6 = value
-  end,
-  min = 0, -- Optional: Set min/max range
-  max = 127,
-  midi_mapping = "Tools:Roto:Rotary_#06" -- Assigns the MIDI mapping target
-}
-
-renoise.tool():add_midi_mapping {
-  name = "Tools:Roto:Rotary_#01",
-  invoke = function(midi_message)
-    ---@class RotaryView
-    ---@field value number
-    ---@type RotaryView
-    local my_ro = vb.views["rotary1"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-  end
-}
-
-renoise.tool():add_midi_mapping {
-  name = "Tools:Roto:Rotary_#02",
-  invoke = function(midi_message)
-    ---@type RotaryView
-    local my_ro = vb.views["rotary2"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-  end
-}
-
-renoise.tool():add_midi_mapping {
-  name = "Tools:Roto:Rotary_#03",
-  invoke = function(midi_message)
-    ---@type RotaryView
-    local my_ro = vb.views["rotary3"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-  end
-}
-
-renoise.tool():add_midi_mapping {
-  name = "Tools:Roto:Rotary_#04",
-  invoke = function(midi_message)
-    ---@type RotaryView
-    local my_ro = vb.views["rotary4"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-  end
-}
-
-renoise.tool():add_midi_mapping {
-  name = "Tools:Roto:Rotary_#05",
-  invoke = function(midi_message)
-    ---@type RotaryView
-    local my_ro = vb.views["rotary5"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-  end
-}
-
-renoise.tool():add_midi_mapping {
-  name = "Tools:Roto:Rotary_#06",
-  invoke = function(midi_message)
-    ---@type RotaryView
-    local my_ro = vb.views["rotary6"]
-    --print(my_ro)
-    my_ro.value = midi_message.int_value
-  end
-}
+for i = 1, 6 do
+    local rotary_view = vb:rotary {
+    id = "rotary" .. tostring(i),
+    tooltip="Instrument #0" .. i .. " notes generator controller.\n\nWhen Roto is running generates and plays random notes based on the knob position and writes the last generated note into the current sequence of the pattern, deleting the previous one.\nSet the knob to 0 to clear all sequences in a track.\nThe corresponding track managed by Roto is created automatically, if it does not already exist, the first time Roto is launched.\nKnob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.",
+      bind = rotooption["valknobs[".. tostring(i) .. "]"],
+      notifier = function(value)
+        nkv[i] = value
+      end,
+      min = 0,
+      max = 127,
+      midi_mapping = "Tools:Roto:Rotary_#0" .. tostring(i)
+    }
+    renoise.tool():add_midi_mapping {
+      name = "Tools:Roto:Rotary_#0" .. tostring(i),
+      invoke = function(midi_message)
+        ---@class RotaryView
+        ---@field value number
+        ---@type RotaryView
+        local my_ro = vb.views["rotary".. tostring(i)]
+        my_ro.value = midi_message.int_value
+      end
+    }
+    table.insert(rotary_views, rotary_view)
+end
 
 Dialog_content = vb:column {
     margin = renoise.ViewBuilder.DEFAULT_DIALOG_MARGIN,
     views = {
       vb:row {
         views = {
-          vb: column {
+          vb:column {
             style = "group", -- Applies rounded corners
             margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
             spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
@@ -269,7 +108,7 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                rotary_view1
+                rotary_views[1]
               },
               vb:horizontal_aligner {
                 mode = "center",
@@ -314,7 +153,7 @@ Dialog_content = vb:column {
           vb:column {
             width = 5,
           },
-          vb: column {
+          vb:column {
             style = "group", -- Applies rounded corners
             margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
             spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
@@ -322,7 +161,7 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                rotary_view2
+                rotary_views[2]
               },
               vb:horizontal_aligner {
                 mode = "center",
@@ -367,7 +206,7 @@ Dialog_content = vb:column {
           vb:column {
             width = 5,
           },
-          vb: column {
+          vb:column {
             style = "group", -- Applies rounded corners
             margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
             spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
@@ -375,7 +214,7 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                rotary_view3
+                rotary_views[3]
               },
               vb:horizontal_aligner {
                 mode = "center",
@@ -420,9 +259,7 @@ Dialog_content = vb:column {
           vb:column {
             width = 5,
           },
-          vb: column {
-            -- margin = 5,
-            -- spacing = 5,
+          vb:column {
             style = "group", -- Applies rounded corners
             margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
             spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
@@ -430,7 +267,7 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                rotary_view4
+                rotary_views[4]
               },
               vb:horizontal_aligner {
                 mode = "center",
@@ -475,7 +312,7 @@ Dialog_content = vb:column {
           vb:column {
             width = 5,
           },
-          vb: column {
+          vb:column {
             style = "group", -- Applies rounded corners
             margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
             spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
@@ -483,7 +320,7 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                rotary_view5
+                rotary_views[5]
               },
               vb:horizontal_aligner {
                 mode = "center",
@@ -528,7 +365,6 @@ Dialog_content = vb:column {
           vb:column {
             width = 5,
           },
-          -- Second Column
           vb:column {
             style = "group", -- Applies rounded corners
             margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
@@ -537,7 +373,7 @@ Dialog_content = vb:column {
               vb:horizontal_aligner {
                 mode = "center",
                 width = "100%",
-                rotary_view6
+                rotary_views[6]
               },
               vb:horizontal_aligner {
                 mode = "center",
@@ -585,7 +421,7 @@ Dialog_content = vb:column {
           vb:column {
             height = 10,
             --width = 300,
-            style = "body", -- Applies rounded corners
+            style = "body",
           }
         }
       },
@@ -593,10 +429,9 @@ Dialog_content = vb:column {
         views = {
           vb:column {
 
-            style = "body", -- Applies rounded corners
+            style = "body",
 
             views = {
-              --vb:text { text = "Column 1 Item 1" },
                   vb:button {
                     style = "rounded",
                     height = 30,
@@ -609,34 +444,31 @@ Dialog_content = vb:column {
             text = "Start",
             tooltip = "The generation and writing of notes is triggered only if playback is initiated using the\n[Start] button in the Roto tool.",
             notifier = function()
-              --print("Button clicked!")
               
               ---@class my_button : renoise.Views.View
               ---@field text string
               ---@field tooltip string
               local my_button = vb.views.bt
-              local oricolor =  {0, 0, 0}
               
               if renoise.song().transport.playing == true then
                   renoise.song().transport.playing = false
                   if renoise.tool():has_timer(my_timer_function) then
                       renoise.tool():remove_timer(my_timer_function)
                   end
-                --renoise.tool():remove_timer(my_timer_function) 
+
                   my_button.text = "Start"
                   my_button.tooltip = "The generation and writing of notes is triggered only if playback is initiated using the\n[Start] button in the Roto tool."
                   --my_button.color = { 82, 36, 17} 
               else
                 renoise.song().transport.playing = true
-                -- Add a timer that calls 'my_timer_function' every 100 milliseconds
+                
                 if not renoise.tool():has_timer(my_timer_function) then
                     renoise.tool():add_timer(my_timer_function, 100)
                 end
-                --renoise.tool():add_timer(my_timer_function, 1000) 
+
                 my_button.text = "Stop"
                 my_button.tooltip = "The generation and writing of notes is triggered only if playback is initiated using the\n[Start] button in the Roto tool."
-                --my_button.color = { 0xFF, 0x00, 0x00 } -- Red in RGB (0-255)
-                --my_button.color = { 82, 36, 17} -- Renoise Orange RGB
+
               end
             end
           }
@@ -646,9 +478,6 @@ Dialog_content = vb:column {
             style = "body"
           },
           vb:column {
-            --width = 244,
-            --margin = renoise.ViewBuilder.DEFAULT_CONTROL_MARGIN,
-            --spacing = renoise.ViewBuilder.DEFAULT_CONTROL_SPACING,
             vb:text {
               visible = false,
               text = "When Roto is running, set the knob to 0\nto clear all sequences in a track.",
@@ -659,7 +488,3 @@ Dialog_content = vb:column {
       }
     }
 }
-
-function GetNoteRoot()
-  return nkv
-end

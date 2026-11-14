@@ -81,35 +81,39 @@ function randomDo(note_root, icol)
           end
         end
         if note_col then
-          note_col.note_value = 120 --!!!!!!!!!!!!
+          note_col.note_value = 120
         end
-        -- s.sequencer:delete_sequence_at(i)
+        -- 
       end
     end
   end
 
 end
 
--- Define the function to execute when a song loads
 local function on_song_loaded()
-    -- Access renoise.song() safely here
-    --print("Song loaded: " .. renoise.song().file_name)
-    --renoise.song().tracks[1].name = "Roto"
-    -- Your tool logic here
-    renoise.song().transport.playing_observable:add_notifier(function()
-  if renoise.song().transport.playing then
-    randomDo(GetNoteRoot())
-    --print("Playback started")
-  else
-    --print("Playback stopped")
+  local song = renoise.song()
+  local transport = song and song.transport
+
+  if not transport then
+    return
   end
-end)
+
+  transport.playing_observable:add_notifier(function()
+    local current_song = renoise.song()
+    local current_transport = current_song and current_song.transport
+
+    if current_transport and current_transport.playing then
+      --print("Playback started")
+    else
+      --print("Playback stopped")
+    end
+  end)
 end
 
 if active then
--- Attach the function to the observable
-renoise.tool().app_new_document_observable:add_notifier(on_song_loaded)      
--- Call the function to execute it
+  -- Attach the function to the observable
+  renoise.tool().app_new_document_observable:add_notifier(on_song_loaded)      
+  -- Call the function to execute it
 end
 
 local function track_exists_by_name(name)
@@ -126,48 +130,49 @@ local function track_exists_by_name(name)
 end
 
 local function show_roto_dialog()
-local song = renoise.song()
-renoise.app():show_custom_dialog("Roto", Dialog_content)
+  local song = renoise.song()
+  renoise.app():show_custom_dialog("Roto", Dialog_content)
 
-if not song then
-  return
-end
+  if not song then
+    return
+  end
 
   local exists, track_obj = track_exists_by_name("Roto")
 
-for i = 1, 6 do
+  for i = 1, 6 do
+    if exists then
+      --print("Track found: " .. track_obj.name)
+    else
+      --print("Track not found")
+        song:insert_track_at(i) -- Insert at top
+    --local trackpos = s
+    local new_track = song:track(i)
+    if new_track then
+      new_track.name = "Instrument #0" .. i-1
+    end
+    --new_track.visible_note_columns = 4   
+    end
+  end
+
   if exists then
     --print("Track found: " .. track_obj.name)
   else
-    --print("Track not found")
-      song:insert_track_at(i) -- Insert at top
-  --local trackpos = s
-  local new_track = song:track(i)
-  if new_track then
-    new_track.name = "Instrument #0" .. i-1
+    song:insert_group_at(1)
+    local group_track = song:track(1)
+    if group_track then
+      group_track.name = "Roto"
+    end
+    -- Assign tracks to the group
+    song:add_track_to_group(2, 1)
+    song:add_track_to_group(3, 2)
+    song:add_track_to_group(4, 3)
+    song:add_track_to_group(5, 4)
+    song:add_track_to_group(6, 5)
+    song:add_track_to_group(7, 6)
   end
-  --new_track.visible_note_columns = 4   
-  end
-end
-
-if exists then
-  --print("Track found: " .. track_obj.name)
-else
-  song:insert_group_at(1)
-  local group_track = song:track(1)
-  if group_track then
-    group_track.name = "Roto"
-  end
-  -- Assign tracks to the group
-  song:add_track_to_group(2, 1)
-  song:add_track_to_group(3, 2)
-  song:add_track_to_group(4, 3)
-  song:add_track_to_group(5, 4)
-  song:add_track_to_group(6, 5)
-  song:add_track_to_group(7, 6)
-end
 
 end
+
 -- Register menu entry
 renoise.tool():add_menu_entry {
   name = "Main Menu:Tools:Roto",
