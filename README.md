@@ -9,12 +9,8 @@ Roto is a Renoise tool. It is a random note generator—unconstrained by musical
         * [Volume](#Volume)
         * [Pan](#Pan)
         * [Delay](#Delay)                
-    * [Usage](#usage)
-        * [isCodiceFiscale](#iscodicefiscale)
-        * [isIBAN](#isiban)
-        * [isPartitaIVA](#ispartitaiva)
-        * [isTargaAuto](#istargaauto)
-        * [isTargaMoto](#istargamoto)
+    * [Clean sequence](#Clean-sequence)
+    * [MIDI map](#MIDI-map)
     * [License](#license)
 
 ## Load Roto Tool
@@ -39,7 +35,14 @@ If enabled the [*pan] checkbox, this adds a random value for the panning to the 
 
 ### Delay
 
-If enabled the [*dly] checkbox, this adds a random delay for the panning to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.
+If enabled the [*dly] checkbox, this adds a random value for the delay to the note generated and written in the current sequence. Enabling or disabling this feature determines whether or not the delay column is displayed in the track.
+
+## Clean Sequence
+
+When Roto is running, set the knob to 0 to clear all sequences in a track.
+
+## MIDI map
+Knob can be mapped to a MIDI controller for greater versatility and expressiveness of the Roto tool.
 
 ## License
 
