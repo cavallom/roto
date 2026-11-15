@@ -18,11 +18,11 @@ Roto is a tool created specifically for the DAW Renoise and designed for live pe
 
 ## Download
 
-[https://github.com/cavallom/roto/blob/master/roto.buddha.rocks.xrnx.zip](https://github.com/cavallom/roto/blob/master/roto.buddha.rocks.xrnx.zip)
+[https://github.com/cavallom/roto/blob/master/roto.buddha.rocks.xrnx](https://github.com/cavallom/roto/blob/master/roto.buddha.rocks.xrnx)
 
 ## Install
 
-To install the tool, download the compressed file and drag it directly onto the Renoise interface. For further details on how to install tools, please refer to the Renoise guide.
+To install the tool, download the file roto.buddha.rocks.xrnx and drag it directly onto the Renoise interface. For further details on how to install tools, please refer to the Renoise guide.
 
 ## Load Roto Tool
 The Roto tool can be launched by selecting the Tools/Roto menu item within the Renoise application.
