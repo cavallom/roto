@@ -3,6 +3,7 @@
 Roto is a tool created specifically for the DAW Renoise and designed for live performances. It is a random note generator—unconstrained by musical scales or harmonic logic—that uses six tracks, each controlled by its own dedicated knob. Roto can be used as a genuine musical instrument, employing knobs instead of strings and frets to generate ephemeral musical phrases—with their shape, dynamics, and breath all intrinsically linked to the musician’s touch and sensitivity. The live performance that is captured can, however, also be render as a song.
 
 * [Roto](#roto)
+    * [Download](#Download)
     * [Install](#Install)
     * [Load Roto Tool](#Load-Roto-Tool)
     * [Activation](#Activation)
@@ -14,6 +15,10 @@ Roto is a tool created specifically for the DAW Renoise and designed for live pe
     * [Instruments](#Instruments)
     * [MIDI map](#MIDI-map)
     * [License](#license)
+
+## Download
+
+[https://github.com/cavallom/roto/blob/master/roto.buddha.rocks.xrnx.zip](https://github.com/cavallom/roto/blob/master/roto.buddha.rocks.xrnx.zip)
 
 ## Install
 
