@@ -175,3 +175,4 @@ renoise.tool():add_menu_entry {
   invoke = show_roto_dialog
 }
 
+-- some notes
